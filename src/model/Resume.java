@@ -1,33 +1,39 @@
 package model;
-
-import java.util.Set;
 public class Resume{
-    private String candidateName;
-    private int yearOfExperience;
-    private Set<String> skills;
-    public Resume(String candidateName,int yearOfExperience,Set<String> skills){
-        this.candidateName=candidateName;
-        this.yearOfExperience=yearOfExperience;
+    private String name;
+    private double cgpa;
+    private String skills;
+    private int score;
+    private String status;
+    public Resume(String name,double cgpa,String skills){
+        this.name=name;
+        this.cgpa=cgpa;
         this.skills=skills;
     }
-    public String getCandidateName(){
-        return candidateName;
+        public String getName(){
+            return name;
+        }
+        public double getCgpa(){
+            return cgpa;
+        }
+        public String getSkills(){
+            return skills;
+        }
+        public int getScore(){
+            return score;
+        }
+        public String getStatus(){
+            return status;
+        }
+        public void setScore(int score){
+            this.score=score;
+        }
+        public void setStatus(String status){
+            this.status=status;
+        }
+        
+        
+
     }
-    public int getYearOfExperience(){
-        return yearOfExperience;
-    }
-    public Set<String> getSkills(){
-        return skills;
-    }
-    @Override
-    public boolean equals(Object o){
-        if(this==o) return true;
-        if(o==null || getClass()!=o.getClass()) return false;
-        Resume resume=(Resume)o;
-        return candidateName.equalsIgnoreCase(resume.candidateName);
-    }
-    @Override
-    public int hashCode(){
-        return candidateName.toLowerCase().hashCode();
-    }
-}
+
+
