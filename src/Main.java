@@ -1,57 +1,45 @@
-
-import java.util.Scanner;
+import java.util.*;
 import model.Resume;
 import service.Screeningservice;
-
 public class Main {
-
-    static Scanner sc = new Scanner(System.in);
-    static Screeningservice service = new Screeningservice();
 
     public static void main(String[] args) {
 
-        while (true) {
-            System.out.println("\n=== SMART RESUME SCREENING SYSTEM ===");
-            System.out.println("1. Enter Candidate Details");
-            System.out.println("2. Exit");
-            System.out.print("Choose option: ");
+        Scanner sc = new Scanner(System.in);
+        Screeningservice screeningService = new Screeningservice();
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+        System.out.println("=== Smart Resume Screening System ===");
 
-            switch (choice) {
-                case 1:
-                    processResume();
-                    break;
-
-                case 2:
-                    System.out.println("System closed.");
-                    return;
-
-                default:
-                    System.out.println("Invalid option.");
-            }
-        }
-    }
-
-    static void processResume() {
-        System.out.print("Enter Name: ");
+        System.out.print("Enter Candidate Name: ");
         String name = sc.nextLine();
 
-        System.out.print("Enter CGPA: ");
-        double cgpa = sc.nextDouble();
-        sc.nextLine();
+        System.out.print("Enter Years of Experience: ");
+        int experience = sc.nextInt();
+        sc.nextLine(); 
 
         System.out.print("Enter Skills (comma separated): ");
-        String skills = sc.nextLine().toLowerCase();
+        String skillsInput = sc.nextLine();
+        List<String> skills = Arrays.asList(skillsInput.split(","));
 
-        Resume resume = new Resume(name, cgpa, skills);
+        System.out.print("Enter Education (Bachelor / Master): ");
+        String education = sc.nextLine();
+        System.out.print("Enter CGPA: ");
+        double cgpa = sc.nextDouble();
 
-        service.evaluateResume(resume);
+        Resume resume = new Resume(name,experience,cgpa,education,skills);
 
-        System.out.println("\n--- RESULT ---");
-        System.out.println("Name   : " + resume.getName());
-        System.out.println("Score  : " + resume.getScore());
-        System.out.println("Status : " + resume.getStatus());
+
+    
+        screeningService.evaluateResume(resume);
+        System.out.println("\n===== SCREENING RESULT =====");
+        System.out.println("Candidate Name : " + resume.getName());
+        System.out.println("Experience     : " + resume.getExperience() + " years");
+        System.out.println("Skills         : " + resume.getSkills());
+        System.out.println("Education      : " + resume.getEducation());
+        System.out.println("Screening Score      : " + resume.getScore());
+        System.out.println("Final Status   : " + resume.getStatus());
+
+        System.out.println("======================");
+        sc.close();
     }
 }
